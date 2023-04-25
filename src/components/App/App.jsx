@@ -1,12 +1,10 @@
+import { Board } from 'components/Board/Board'
 
-
-const App = () => {
-  
-  <>
-    <App/>
-  </>
-    
-  
+const App = ()=> {
+  return (
+    <div>
+      <Board/>
+    </div>
+ )
 }
-
-export default App;
+export default App

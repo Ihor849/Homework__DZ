@@ -1,0 +1,52 @@
+hr {
+  margin: 10px 0;
+  border: 2px solid #bfe2ff;
+}
+.container {
+  width: 500px;
+  margin: 0 auto;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  background-color: #8bc34a;
+}
+.section__btn {
+  display: grid;
+  row-gap: 25px;
+  align-items: center;
+  padding: 15px;
+  border-radius: 5px;
+  background-color: aqua;
+}
+.title {
+  text-align: center;
+}
+
+.stat__text {
+  display: flex;
+  gap: 25px;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-around;
+  gap: 25px;
+}
+.btn {
+  padding: 5px 15px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  font-size: 15px;
+  font-style: italic;
+  font-weight: 700;
+}
+.good {
+  background-color: green;
+}
+.neutral {
+  background-color: rgb(19, 140, 161);
+}
+.bad {
+  background-color: rgb(216, 69, 69);
+}
