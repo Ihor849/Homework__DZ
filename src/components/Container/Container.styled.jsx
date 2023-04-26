@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 
-export const MainContainer =styled.div`
+export const ContainerBox =styled.div`
     display: grid;
     justify-items: center;
     align-items: center;

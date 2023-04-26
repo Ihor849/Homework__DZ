@@ -1,11 +1,10 @@
-
 import PropTypes from 'prop-types'
 
-import {MainContainer} from"./Container.styled"
+import {ContainerBox} from"./Container.styled"
 
 
 const Container = ({ children }) => {
-    return(<MainContainer classNames="container">{children}</MainContainer>)
+    return(<ContainerBox classNames="container">{children}</ContainerBox>)
 }
 export default Container;
 

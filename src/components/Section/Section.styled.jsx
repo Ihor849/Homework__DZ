@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 
-export const MainSection =styled.section`
+export const BoxSection =styled.section`
     width: 280px;
     display: flex;
     flex-direction: column;
@@ -8,7 +8,7 @@ export const MainSection =styled.section`
     gap: 8px;
     margin: 0;
 `
-export const MainTitle = styled.h2`
+export const BoxTitle = styled.h2`
     font-size: 22px;
     text-align: center;
     color: gray;
