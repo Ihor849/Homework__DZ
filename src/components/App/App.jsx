@@ -65,15 +65,39 @@ export class App extends Component {
     return contactsFilter;
   };
 
+  // onDelete = (id) => {
+  //   Notiflix.Report.info("Contact successfully removed")
+  //   this.setState(prevState => ({
+  //     contacts: prevState.contacts.filter(contact => contact.id !== id)
+  //   }));
+  // }
+
   onDelete = (id) => {
-    this.setState(prevState => ({
+    Notiflix.Confirm.show(
+    'Confirm',
+    'You want to delete a contact?"',
+    'Yes',
+    'No',
+    () => {this.setState(prevState => ({
       contacts: prevState.contacts.filter(contact => contact.id !== id)
-    }));
-      // Notiflix.Report.info(`${this.contact.id} FFFFFFFFFFFFFFFFF`)
-    console.log(this.state.contacts.id);
-    console.log(this.state.contacts);
-    
+      }));
+      },
+    () => {
+      
+      },
+      {
+        titleColor: '#ce6214',
+        titleFontSize: '20px',
+        messageColor: '#1e1e1e',
+        messageFontSize: '20px',
+      },
+    );
   }
+    
+    
+  
+
+
 
   render() {
     const { contacts, filter } = this.state;
