@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Notiflix from 'notiflix';
 import {Container} from 'components/Container/Container'
 import {Section} from 'components/Section/Section'
 import { ContactForm } from 'components/ContactForm/ContactForm'
@@ -23,13 +24,16 @@ export class App extends Component {
     this.setState(({ contacts }) => {
       if (this.state.contacts.find((contact) => contact.name.toLowerCase() === newContact.name.toLowerCase())) {
         console.log("Уже есть");
+        Notiflix.Report.info("INFO",`${newContact.name} already in the phonebook`);
         return;
       } else if (this.state.contacts.find((contact) => contact.number === newContact.number)) {
-         console.log("НОМЕР есть");
+        console.log("НОМЕР есть");
+        Notiflix.Report.info("INFO",`${newContact.number} already in the phonebook`);
         return;
       }
       return { contacts: [newContact, ...contacts] };
     });
+    Notiflix.Notify.success(`${newContact.name} This subscriber is added to the phone book`)
     console.log(this.state.contacts);
     
   };
@@ -64,7 +68,9 @@ export class App extends Component {
   onDelete = (id) => {
     this.setState(prevState => ({
       contacts: prevState.contacts.filter(contact => contact.id !== id)
-    }))
+    }));
+      // Notiflix.Report.info(`${this.contact.id} FFFFFFFFFFFFFFFFF`)
+    console.log(this.state.contacts.id);
     console.log(this.state.contacts);
     
   }

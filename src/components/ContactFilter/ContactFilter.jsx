@@ -1,7 +1,7 @@
-import {BoxFilter,Label,Input} from './ContactFilter.styled'
+import propTypes from 'prop-types';
+import { BoxFilter, Label, Input } from './ContactFilter.styled'
 
 export const ContactFilter = ({ filter, onFilter }) => {
-  console.log(filter);
   
   return (
     <BoxFilter>
@@ -17,3 +17,8 @@ export const ContactFilter = ({ filter, onFilter }) => {
     </BoxFilter>
   );
 };
+
+ContactFilter.propEypes = {
+  filter: propTypes.string,
+  onFilter: propTypes.func,
+}
