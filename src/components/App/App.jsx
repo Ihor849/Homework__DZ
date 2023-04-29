@@ -21,6 +21,8 @@ export class App extends Component {
   addContact = ({ id, name, number }) => {
     const newContact = { id, name, number };
     this.setState(({ contacts }) => {
+      console.log(contacts);
+      console.log(newContact);
       if (
         this.state.contacts.find(
           contact =>
@@ -72,11 +74,11 @@ export class App extends Component {
           contact.name.toLowerCase().includes(this.state.filter)
       );
     } else {
-      console.log(this.state.contacts);
+      // console.log(this.state.contacts);
 
       return this.state.contacts;
     }
-    console.log(contactsFilter);
+    // console.log(contactsFilter);
     return contactsFilter;
   };
 
@@ -110,13 +112,13 @@ export class App extends Component {
             <ContactForm onSubmit={this.addContact} contacts={contacts} />
           </Section>
           <Section title="Contacts ">
-            {this.state.filter.length > 1 && (
-              <ContactFilter
-                filter={filter}
-                onFilter={this.onFilter}
-                // dis={this.state.contacts.length === 0}
-              />
-            )}
+            {/* {this.state.filter.length > 1 && ( */}
+            <ContactFilter
+              filter={filter}
+              onFilter={this.onFilter}
+              // dis={this.state.contacts.length === 0}
+            />
+            {/* )} */}
 
             <ContactsList
               contacts={this.onFilterContacts()}
