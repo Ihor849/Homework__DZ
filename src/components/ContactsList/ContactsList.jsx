@@ -4,7 +4,8 @@ import {List} from './ContactsList.styled'
 
 
 
-export const ContactsList = ({ contacts ,onDelete}) => {
+export const ContactsList = ({ contacts, onDelete }) => {
+	
 	console.log(contacts);
 	return (
 		<List>

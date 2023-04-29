@@ -5,7 +5,7 @@ import {Section} from 'components/Section/Section'
 import { ContactForm } from 'components/ContactForm/ContactForm'
 import { ContactsList } from 'components/ContactsList/ContactsList'
 import {ContactFilter} from 'components/ContactFilter/ContactFilter'
-// import { nanoid } from 'nanoid'
+
 
 export class App extends Component {
 
@@ -48,6 +48,7 @@ export class App extends Component {
   
   onFilterContacts = () => {
     let contactsFilter = [];
+   
     if (this.state.filter) {
       console.log(this.state.filter);
       
@@ -65,12 +66,6 @@ export class App extends Component {
     return contactsFilter;
   };
 
-  // onDelete = (id) => {
-  //   Notiflix.Report.info("Contact successfully removed")
-  //   this.setState(prevState => ({
-  //     contacts: prevState.contacts.filter(contact => contact.id !== id)
-  //   }));
-  // }
 
   onDelete = (id) => {
     Notiflix.Confirm.show(
@@ -82,9 +77,7 @@ export class App extends Component {
       contacts: prevState.contacts.filter(contact => contact.id !== id)
       }));
       },
-    () => {
-      
-      },
+    () => {},
       {
         titleColor: '#ce6214',
         titleFontSize: '20px',
@@ -94,10 +87,6 @@ export class App extends Component {
     );
   }
     
-    
-  
-
-
 
   render() {
     const { contacts, filter } = this.state;
@@ -108,7 +97,8 @@ export class App extends Component {
             <ContactForm onSubmit={this.addContact} contacts={contacts} />
           </Section>
           <Section title="Contacts ">
-            <ContactFilter filter={filter} onFilter={ this.onFilter}  />
+              <ContactFilter filter={filter} onFilter={this.onFilter} />
+              
             <ContactsList contacts={this.onFilterContacts()} onDelete={this.onDelete} />
           </Section>
         </Container>
