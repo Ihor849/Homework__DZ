@@ -6,7 +6,7 @@ export const ContactItem = ({ id, name, number, onDelete}) => {
     <Item   key={id}>
       <span>{name}</span>
       <span>{number}</span>
-      < Button type="button" onClick={() => onDelete(id)}>
+      < Button type="button" onClick={() => onDelete(id,name)}>
         Delete
       </ Button>
     </Item>

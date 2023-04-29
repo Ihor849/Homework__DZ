@@ -8,6 +8,7 @@ export const ContactsList = ({ contacts, onDelete }) => {
 	
 	console.log(contacts);
 	return (
+		contacts.length !==0 &&
 		<List>
 			{contacts.map(({ id, name, number }) => (
 				<ContactItem

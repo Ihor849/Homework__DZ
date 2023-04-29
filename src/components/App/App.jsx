@@ -4,7 +4,8 @@ import {Container} from 'components/Container/Container'
 import {Section} from 'components/Section/Section'
 import { ContactForm } from 'components/ContactForm/ContactForm'
 import { ContactsList } from 'components/ContactsList/ContactsList'
-import {ContactFilter} from 'components/ContactFilter/ContactFilter'
+import { ContactFilter } from 'components/ContactFilter/ContactFilter'
+import {GlobalStyle} from '../../style/GlobalStyle'
 
 
 export class App extends Component {
@@ -67,10 +68,10 @@ export class App extends Component {
   };
 
 
-  onDelete = (id) => {
+  onDelete = (id,name) => {
     Notiflix.Confirm.show(
     'Confirm',
-    'You want to delete a contact?"',
+    ` Do You want to delete a ${name}?`,
     'Yes',
     'No',
     () => {this.setState(prevState => ({
@@ -83,6 +84,7 @@ export class App extends Component {
         titleFontSize: '20px',
         messageColor: '#1e1e1e',
         messageFontSize: '20px',
+        
       },
     );
   }
@@ -97,11 +99,12 @@ export class App extends Component {
             <ContactForm onSubmit={this.addContact} contacts={contacts} />
           </Section>
           <Section title="Contacts ">
-              <ContactFilter filter={filter} onFilter={this.onFilter} />
+              <ContactFilter filter={filter} onFilter={this.onFilter} dis={ this.state.contacts.length===0}/>
               
             <ContactsList contacts={this.onFilterContacts()} onDelete={this.onDelete} />
           </Section>
-        </Container>
+          </Container>
+          <GlobalStyle/>
       </>
       
     )

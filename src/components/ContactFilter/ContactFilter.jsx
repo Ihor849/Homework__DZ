@@ -1,7 +1,7 @@
 import propTypes from 'prop-types';
 import { BoxFilter, Label, Input } from './ContactFilter.styled'
 
-export const ContactFilter = ({ filter, onFilter }) => {
+export const ContactFilter = ({ filter, onFilter ,dis}) => {
   
   return (
     <BoxFilter>
@@ -12,6 +12,7 @@ export const ContactFilter = ({ filter, onFilter }) => {
           name="filter"
           value={filter}
           onChange={onFilter}
+          disabled={dis}
         />
       
     </BoxFilter>
