@@ -47,11 +47,12 @@ export class App extends Component {
         );
         return;
       }
+      Notiflix.Notify.success(
+        `${newContact.name} This subscriber is added to the phone book`
+      );
       return { contacts: [newContact, ...contacts] };
     });
-    Notiflix.Notify.success(
-      `${newContact.name} This subscriber is added to the phone book`
-    );
+
     console.log(this.state.contacts);
   };
 
