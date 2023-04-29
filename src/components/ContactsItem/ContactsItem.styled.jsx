@@ -1,15 +1,15 @@
 import styled from 'styled-components';
 
 export const Item = styled.li`
-
   display: flex;
+  max-height: 50px;
   gap: ${props => props.theme.spacing(3)};
   justify-content: space-between;
   align-items: center;
   border: 1px solid ${props => props.theme.colors.black};
   border-radius: ${props => props.theme.spacing(2)};
   padding: 5px 15px;
-`;    
+`;
 
 export const Button = styled.button`
   border: 1px solid ${props => props.theme.colors.black};

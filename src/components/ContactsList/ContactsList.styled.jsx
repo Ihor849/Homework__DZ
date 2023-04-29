@@ -1,12 +1,11 @@
 import styled from 'styled-components';
 
-
 export const List = styled.ul`
   list-style-type: none;
-  max-height: 120px;
+  height: 280px;
   overflow-y: scroll;
   width: 93%;
-  display:grid;
+  display: grid;
   gap: ${props => props.theme.spacing(3)};
   padding: ${props => props.theme.spacing(10)};
   border-radius: ${props => props.theme.spacing(3)};
