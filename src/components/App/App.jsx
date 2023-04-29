@@ -112,13 +112,13 @@ export class App extends Component {
             <ContactForm onSubmit={this.addContact} contacts={contacts} />
           </Section>
           <Section title="Contacts ">
-            {/* {this.state.filter.length > 1 && ( */}
-            <ContactFilter
-              filter={filter}
-              onFilter={this.onFilter}
-              // dis={this.state.contacts.length === 0}
-            />
-            {/* )} */}
+            {this.onFilterContacts().length > 5 && (
+              <ContactFilter
+                filter={filter}
+                onFilter={this.onFilter}
+                // dis={this.state.contacts.length === 0}
+              />
+            )}
 
             <ContactsList
               contacts={this.onFilterContacts()}
