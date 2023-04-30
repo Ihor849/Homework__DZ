@@ -22,7 +22,7 @@ export class App extends Component {
     const newContact = { id, name, number };
     this.setState(({ contacts }) => {
       console.log(contacts);
-      console.log(newContact);
+      // console.log(newContact);
       if (
         this.state.contacts.find(
           contact =>
