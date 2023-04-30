@@ -21,8 +21,6 @@ export class App extends Component {
   addContact = ({ id, name, number }) => {
     const newContact = { id, name, number };
     this.setState(({ contacts }) => {
-      console.log(contacts);
-      // console.log(newContact);
       if (
         this.state.contacts.find(
           contact =>
@@ -52,12 +50,9 @@ export class App extends Component {
       );
       return { contacts: [newContact, ...contacts] };
     });
-
-    console.log(this.state.contacts);
   };
 
   onFilter = e => {
-    console.log(e.target.value);
     this.setState({
       filter: e.target.value,
     });
@@ -75,11 +70,9 @@ export class App extends Component {
           contact.name.toLowerCase().includes(this.state.filter)
       );
     } else {
-      // console.log(this.state.contacts);
-
       return this.state.contacts;
     }
-    // console.log(contactsFilter);
+
     return contactsFilter;
   };
 
