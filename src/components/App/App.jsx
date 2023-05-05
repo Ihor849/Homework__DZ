@@ -26,11 +26,10 @@ export class App extends Component {
       const { hits, totalHits } = await fetchImages(searchQuery, page);
       console.log(hits, totalHits);
       if (hits.length < 1) {
-        alert('Sorry');
+        this.setState({ status: 'idle', totalHits: 0 });
       } else {
         this.setState({
           items: hits,
-
           totalHits: totalHits,
           status: 'resolved',
         });
@@ -71,13 +70,17 @@ export class App extends Component {
     //   </AppImg>
     // );
 
-    const { totalHits, status, items } = this.state;
+    const { totalHits, status, items, query } = this.state;
     if (status === 'idle') {
       return (
         <AppImg>
           <Container>
             <Searchbar onSubmit={this.handleSubmit} />
-            <ImageGallery images={this.state.items} />
+            {query && totalHits < 1 ? (
+              <p>FFFFFFFFFFFFFFFFFF</p>
+            ) : (
+              <ImageGallery images={this.state.items} />
+            )}
           </Container>
         </AppImg>
       );
@@ -89,7 +92,6 @@ export class App extends Component {
             <Searchbar onSubmit={this.handleSubmit} />
             <ImageGallery images={this.state.items} />
             <ColorRingLoad />
-            <p>Загружаем спинер</p>;
           </Container>
         </AppImg>
       );

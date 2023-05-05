@@ -7,8 +7,6 @@ export async function fetchImages(query, page) {
     key: '34377487-34dfc22cd0267d3510191dd51',
     image_type: 'photo',
     q: query,
-    orientation: 'horizontal',
-    safesearch: 'true',
     per_page: 12,
     page,
   };
