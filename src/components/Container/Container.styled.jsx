@@ -1,14 +1,12 @@
 import styled from 'styled-components';
 
 export const ContainerBox = styled.div`
-  width: 600px;
+  width: 100%;
   display: grid;
   justify-items: center;
   align-items: center;
-  gap: ${props => props.theme.spacing(15)};
-  background: #00c9ff;
-  background: -webkit-linear-gradient(to left, #92fe9d, #00c9ff);
-  background: linear-gradient(to left, #92fe9d, #00c9ff);
-  padding: ${props => props.theme.spacing(8)};
+  gap: 10px;
+  background: #ff7700b3;
+  padding: 10px;
   margin: 0 auto;
 `;

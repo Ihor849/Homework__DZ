@@ -1,157 +1,123 @@
 import React, { Component } from 'react';
-import Notiflix from 'notiflix';
+
+import { AppImg } from './App.styled';
+// import Notiflix from 'notiflix';
 import { Container } from 'components/Container/Container';
-import { Section } from 'components/Section/Section';
-import { ContactForm } from 'components/ContactForm/ContactForm';
-import { ContactsList } from 'components/ContactList/ContactList';
-import { ContactFilter } from 'components/ContactFilter/ContactFilter';
-import { GlobalStyle } from '../../style/GlobalStyle';
+import { Searchbar } from 'components/Searchbar/Searchbar';
+import { fetchImages } from 'components/FetchImages/FetchImages';
+import { ImageGallery } from 'components/ImageGallery/ImageGallery';
+import { Button } from 'components/Button/Button';
+import { ColorRingLoad } from 'components/Loader/Loader';
 
 export class App extends Component {
   state = {
-    // contacts: [
-    //   { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-    //   { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-    //   { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-    //   { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-    // ],
-    contacts: [],
-    filter: '',
+    query: '',
+    items: [],
+    status: 'idle',
+    totalHits: 0,
+    page: 1,
   };
+  handleSubmit = async searchQuery => {
+    const { page } = this.state;
+    this.setState({ query: searchQuery, page: 1 });
 
-  componentDidMount() {
-    console.log('componentDidMount');
-    const contacts = localStorage.getItem('contacts');
-    const parsedContacts = JSON.parse(contacts);
-    console.log(parsedContacts);
+    try {
+      this.setState({ status: 'pending' });
+      const { hits, totalHits } = await fetchImages(searchQuery, page);
+      console.log(hits, totalHits);
+      if (hits.length < 1) {
+        alert('Sorry');
+      } else {
+        this.setState({
+          items: hits,
 
-    if (parsedContacts) {
-      console.log(parsedContacts);
-      this.setState({ contacts: parsedContacts });
-    }
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    console.log('App componentDidUpdate');
-    console.log(prevState);
-    console.log(this.state);
-    if (this.state.contacts !== prevState.contacts) {
-      console.log('Обновились контакты');
-      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
-    }
-  }
-
-  addContact = ({ id, name, number }) => {
-    const newContact = { id, name, number };
-    this.setState(({ contacts }) => {
-      // console.log(contacts);
-      // console.log(newContact);
-      if (
-        this.state.contacts.find(
-          contact =>
-            contact.name.toLowerCase() === newContact.name.toLowerCase()
-        )
-      ) {
-        console.log('Уже есть');
-        Notiflix.Report.info(
-          'INFO',
-          `${newContact.name} already in the phonebook`
-        );
-        return;
-      } else if (
-        this.state.contacts.find(
-          contact => contact.number === newContact.number
-        )
-      ) {
-        console.log('НОМЕР есть');
-        Notiflix.Report.info(
-          'INFO',
-          `${newContact.number} already in the phonebook`
-        );
-        return;
+          totalHits: totalHits,
+          status: 'resolved',
+        });
       }
-      Notiflix.Notify.success(
-        `${newContact.name} This subscriber is added to the phone book`
-      );
-      return { contacts: [newContact, ...contacts] };
-    });
-
-    // console.log(this.state.contacts);
-  };
-
-  onFilter = e => {
-    console.log(e.target.value);
-    this.setState({
-      filter: e.target.value,
-    });
-  };
-
-  onFilterContacts = () => {
-    let contactsFilter = [];
-
-    if (this.state.filter) {
-      console.log(this.state.filter);
-
-      contactsFilter = this.state.contacts.filter(
-        contact =>
-          contact.name.includes(this.state.filter) ||
-          contact.name.toLowerCase().includes(this.state.filter)
-      );
-    } else {
-      // console.log(this.state.contacts);
-
-      return this.state.contacts;
+    } catch (error) {
+      this.setState({ status: 'rejected' });
     }
-    // console.log(contactsFilter);
-    return contactsFilter;
   };
 
-  onDelete = (id, name) => {
-    Notiflix.Confirm.show(
-      'Confirm',
-      ` Do You want to delete a ${name}?`,
-      'Yes',
-      'No',
-      () => {
-        this.setState(prevState => ({
-          contacts: prevState.contacts.filter(contact => contact.id !== id),
-        }));
-      },
-      () => {},
-      {
-        titleColor: '#ce6214',
-        titleFontSize: '20px',
-        messageColor: '#1e1e1e',
-        messageFontSize: '20px',
-      }
-    );
+  onLoadMore = async () => {
+    const { query, page } = this.state;
+    this.setState({ status: 'pending' });
+    this.setState(prevState => {
+      return { page: prevState.page + 1 };
+    });
+    try {
+      const { hits } = await fetchImages(query, page + 1);
+
+      this.setState(prevState => ({
+        items: [...prevState.items, ...hits],
+        status: 'resolved',
+      }));
+
+      console.log(hits);
+    } catch (error) {
+      this.setState({ status: 'rejected' });
+    }
   };
 
   render() {
-    const { contacts, filter } = this.state;
-    return (
-      <>
-        <Container>
-          <Section title="Phonebook">
-            <ContactForm onSubmit={this.addContact} contacts={contacts} />
-          </Section>
-          <Section title="Contacts ">
-            {this.state.contacts.length !== 0 && (
-              <ContactFilter
-                filter={filter}
-                onFilter={this.onFilter}
-                dis={this.state.contacts.length <= 4}
-              />
-            )}
+    // return (
+    //   <AppImg>
+    //     <Container>
+    //       <Searchbar onSubmit={this.handleSubmit} />
+    //       <ImageGallery images={this.state.items} />
+    //       <Button btnLoadMore={this.onLoadMore} />
+    //     </Container>
+    //   </AppImg>
+    // );
 
-            <ContactsList
-              contacts={this.onFilterContacts()}
-              onDelete={this.onDelete}
-            />
-          </Section>
-        </Container>
-        <GlobalStyle />
-      </>
-    );
+    const { totalHits, status, items } = this.state;
+    if (status === 'idle') {
+      return (
+        <AppImg>
+          <Container>
+            <Searchbar onSubmit={this.handleSubmit} />
+            <ImageGallery images={this.state.items} />
+          </Container>
+        </AppImg>
+      );
+    }
+    if (status === 'pending') {
+      return (
+        <AppImg>
+          <Container>
+            <Searchbar onSubmit={this.handleSubmit} />
+            <ImageGallery images={this.state.items} />
+            <ColorRingLoad />
+            <p>Загружаем спинер</p>;
+          </Container>
+        </AppImg>
+      );
+    }
+    if (status === 'regected') {
+      return (
+        <AppImg>
+          <Container>
+            <Searchbar onSubmit={this.handleSubmit} />
+            <ImageGallery images={this.state.items} />
+            <p>Something wrong, try later</p>
+          </Container>
+        </AppImg>
+      );
+    }
+    if (status === 'resolved') {
+      return (
+        <AppImg>
+          <Container>
+            <Searchbar onSubmit={this.handleSubmit} />
+            <ImageGallery images={this.state.items} />
+            {totalHits > 12 && totalHits > items.length && (
+              <Button btnLoadMore={this.onLoadMore} />
+            )}
+          </Container>
+        </AppImg>
+      );
+    }
   }
 }
+export default App;
