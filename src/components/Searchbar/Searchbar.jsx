@@ -1,54 +1,34 @@
 import { Component } from 'react';
+// import PropTypes from 'prop-types';
 import {
   SearchbarHeader,
   SearchForm,
   SearchFormButton,
+  SearchFormButtonLabel,
   SearchFormInput,
 } from './Searchbar.styled';
 
 export class Searchbar extends Component {
-  state = {
-    searcQuery: '',
-  };
-
-  handleChange = e => {
-    const query = e.target.value;
-    this.setState({ searcQuery: query });
-  };
-  handleSubmit = e => {
-    console.log(e);
-    e.preventDefault();
-    if (this.state.searcQuery.trim() === '') {
-      alert('Введите запрос');
-      return;
-    }
-    this.props.onSubmit(this.state.searcQuery);
-    // this.setState({ searcQuery: '' });
-  };
-
-  // onClear = () => {
-  //   setValue('');
-  // };
-
   render() {
     return (
-      <SearchbarHeader className="searchbar">
-        <SearchForm className="form" onSubmit={this.handleSubmit}>
-          <SearchFormButton type="submit" className="button">
-            <span className="buttonLabel">Search</span>
+      <SearchbarHeader>
+        <SearchForm onSubmit={this.props.onSubmit}>
+          <SearchFormButton type="submit">
+            <SearchFormButtonLabel>Search</SearchFormButtonLabel>
           </SearchFormButton>
-
           <SearchFormInput
-            className="input"
             type="text"
-            // value={search}
+            name="search"
             autoComplete="off"
             autoFocus
             placeholder="Search images and photos"
-            onChange={this.handleChange}
           />
         </SearchForm>
       </SearchbarHeader>
     );
   }
 }
+
+// Searchbar.propTypes = {
+//   onSubmit: PropTypes.func,
+// };

@@ -12,7 +12,7 @@ export const Gallery = styled.ul`
   margin-left: auto;
   margin-right: auto;
 `;
-export const GalleryItem = styled.li`
+export const ImageGalleryItem = styled.li`
   width: 100%;
   height: 260px;
   object-fit: cover;
