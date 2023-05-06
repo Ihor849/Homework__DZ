@@ -41,6 +41,7 @@ export class App extends Component {
   };
   onClickImage = url => {
     this.setState({ showModal: true, largeImageURL: url });
+    console.log(this.setState);
   };
 
   onModalClose = () => {
