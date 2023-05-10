@@ -1,21 +1,29 @@
-// import PropTypes from "prop-types"
+import PropTypes from 'prop-types';
+import { Btn, BtnBlock } from './FeedbackOptions.styled';
 
+export const FeedbackOptions = ({ options, onLeaveFeedback }) => {
+  return (
+    <>
+      <BtnBlock className="btn__block">
+        {options.map(option => {
+          // console.log(options);
+          return (
+            <Btn
+              type="button"
+              onClick={() => onLeaveFeedback(option)}
+              key={option}
+              className="btn"
+            >
+              {option}
+            </Btn>
+          );
+        })}
+      </BtnBlock>
+    </>
+  );
+};
 
-
-// export const FeedbackOptios = ({ good, neutral, bad }) => {
-// 	console.log(good);
-//   return (
-//     <>
-//       <button type="button">{good}</button>
-//       <button type="button">{neutral}</button>
-//       <button type="button">{bad}</button>
-//     </>
-//   )
-    
-// }
-
-// FeedbackOptios.propTypes = {
-// 	good: PropTypes.number,
-// 	neutral: PropTypes.number,
-// 	bad: PropTypes.number 
-// }
+FeedbackOptions.propTypes = {
+  options: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  onLeaveFeedback: PropTypes.func.isRequired,
+};
