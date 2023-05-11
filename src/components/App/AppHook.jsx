@@ -1,20 +1,16 @@
 /// import React, { Component } from 'react';
 import { useState } from 'react';
-import Notiflix from 'notiflix';
+// import Notiflix from 'notiflix';
 import { Container } from 'components/Container/Container';
 import { Section } from 'components/Section/Section';
-import { ContactForm } from 'components/ContactForm/HookContactForm';
+import ContactForm from 'components/ContactForm/ContactFormHook';
 import { ContactsList } from 'components/ContactList/ContactList';
 import { ContactFilter } from 'components/ContactFilter/ContactFilter';
 import { GlobalStyle } from '../../style/GlobalStyle';
+import useLocalStorage from 'components/hooks/useLocalStorage';
 
 export default function AppHook() {
-  const [contacts, setContacts] = useState([
-    { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-    { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-    { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-    { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-  ]);
+  const [contacts, setContacts] = useLocalStorage('contacts', []);
 
   const [filter, setFilter] = useState('');
   //   state = {
@@ -49,28 +45,28 @@ export default function AppHook() {
     console.log(newContact);
     setContacts([...contacts]);
     console.log(contacts);
-    if (
-      contacts.find(
-        contact => contact.name.toLowerCase() === newContact.name.toLowerCase()
-      )
-    ) {
-      console.log('Уже есть');
-      Notiflix.Report.info(
-        'INFO',
-        `${newContact.name} already in the phonebook`
-      );
-      return;
-    } else if (contacts.find(contact => contact.number === newContact.number)) {
-      console.log('НОМЕР есть');
-      Notiflix.Report.info(
-        'INFO',
-        `${newContact.number} already in the phonebook`
-      );
-      return;
-    }
-    Notiflix.Notify.success(
-      `${newContact.name} This subscriber is added to the phone book`
-    );
+    // if (
+    //   contacts.find(
+    //     contact => contact.name.toLowerCase() === newContact.name.toLowerCase()
+    //   )
+    // ) {
+    //   console.log('Уже есть');
+    //   Notiflix.Report.info(
+    //     'INFO',
+    //     `${newContact.name} already in the phonebook`
+    //   );
+    //   return;
+    // } else if (contacts.find(contact => contact.number === newContact.number)) {
+    //   console.log('НОМЕР есть');
+    //   Notiflix.Report.info(
+    //     'INFO',
+    //     `${newContact.number} already in the phonebook`
+    //   );
+    //   return;
+    // }
+    // Notiflix.Notify.success(
+    //   `${newContact.name} This subscriber is added to the phone book`
+    // );
     console.log(contacts);
     return setContacts(prev => [newContact, ...prev]);
   };
