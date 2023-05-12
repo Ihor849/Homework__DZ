@@ -5,16 +5,16 @@ import { useState } from 'react';
 import { nanoid } from 'nanoid';
 import { FormBlock, FormHook } from './ContactForm.styled';
 
-export default function ContactForm() {
+export default function ContactForm(props) {
+  console.log(props);
   const { register, handleSubmit } = useForm();
   const [data, setData] = useState();
   const [contact, setContact] = useState();
 
   const onSubmit = data => {
-    console.log(data);
     const { name, number } = data;
     const contact = { id: nanoid(), name, number };
-    console.log(typeof contact);
+    // console.log(typeof contact);
     setContact(contact);
   };
   //   const handleSubmit = data => {

@@ -122,7 +122,7 @@ export default function AppHook() {
     <>
       <Container>
         <Section title="Phonebook">
-          <ContactForm onSubmit={addContact} />
+          <ContactForm onSubmit={addContact} test={onDelete} />
         </Section>
         <Section title="Contacts ">
           {contacts.length !== 0 && (
