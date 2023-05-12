@@ -1,11 +1,11 @@
-// import React, { Component } from 'react';
+import React from 'react';
 import { useState } from 'react';
 
 import { Container } from 'components/Container/Container';
 import { Searchbar } from 'components/Searchbar/Searchbar';
 import { GlobalStyle } from '../../style/GlobalStyle';
 import { ImageGallery } from 'components/ImageGallery/ImageGallery';
-import { Button } from 'components/Button/Button';
+import { Button } from 'components/Button/ButtonHook';
 import { Modal } from 'components/Modal/Modal';
 import { fetchHitsByQuery } from '../../service/Api';
 import { Loader } from 'components/Loader/Loader';
@@ -21,19 +21,24 @@ export default function App() {
   const [error, setError] = useState(null);
 
   const onSubmit = e => {
-    console.log(e.target.search.value);
+    const searchQuery = e.target.search.value;
+
     e.preventDefault();
-    setQuery(e.target.search.value);
+    if (searchQuery === '') {
+      return;
+    }
+    setQuery(searchQuery);
     setIsLoading(true);
     setImages([]);
-
-    fetchGallery(query, 1);
+    console.log(searchQuery);
+    setPage(1);
+    fetchGallery(searchQuery, 1);
   };
 
   const onNextPage = () => {
-    setPage(prev => prev + 1);
     setIsLoading(true);
     fetchGallery(query, page + 1);
+    setPage(prev => prev + 1);
   };
 
   const onClickImage = url => {
@@ -49,6 +54,7 @@ export default function App() {
   async function fetchGallery(query, page) {
     try {
       const response = await fetchHitsByQuery(query, page);
+      console.log(query, page);
       setImages(prevState => [...prevState, ...response]);
       if (response.length < 12) {
         setShowBtn(false);
@@ -66,7 +72,6 @@ export default function App() {
     }
   }
 
-  //     const { images, isLoading, showBtn, showModal, largeImageURL } = this.state;
   return (
     <>
       <Container>
