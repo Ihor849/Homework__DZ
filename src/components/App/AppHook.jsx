@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { Container } from 'components/Container/Container';
 import { Searchbar } from 'components/Searchbar/Searchbar';
@@ -22,7 +22,6 @@ export default function App() {
 
   const onSubmit = e => {
     const searchQuery = e.target.search.value;
-
     e.preventDefault();
     if (searchQuery === '') {
       return;
@@ -30,14 +29,12 @@ export default function App() {
     setQuery(searchQuery);
     setIsLoading(true);
     setImages([]);
-    console.log(searchQuery);
     setPage(1);
-    fetchGallery(searchQuery, 1);
+    e.target.reset();
   };
 
   const onNextPage = () => {
     setIsLoading(true);
-    fetchGallery(query, page + 1);
     setPage(prev => prev + 1);
   };
 
@@ -71,7 +68,13 @@ export default function App() {
       setIsLoading(false);
     }
   }
+  useEffect(() => {
+    if (query === '') {
+      return;
+    }
 
+    fetchGallery(query, page);
+  }, [page, query]);
   return (
     <>
       <Container>
