@@ -1,6 +1,6 @@
 import propTypes from 'prop-types';
 import {useState} from 'react'
-import { Item, Button } from './ContactsItem.styled';
+import { Item, Button,Wrapper } from './ContactsItem.styled';
 
 export const ContactItem = ({ id, name, number, onDelete }) => {
   const [isEdit, setIsEdit] = useState(false);
@@ -11,10 +11,10 @@ export const ContactItem = ({ id, name, number, onDelete }) => {
     <Item key={id}>
       {isEdit
        ?
-      <>
+      <Wrapper>
       <input type='text'/>
       <input type='text'/>
-      </>
+      </Wrapper>
       : 
       <>
       <span>{name}</span>
