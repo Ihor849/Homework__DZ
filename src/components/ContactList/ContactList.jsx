@@ -13,6 +13,7 @@ export const ContactsList = ({ contacts, onDelete }) => {
             number={number}
             id={id}
             onDelete={onDelete}
+            
           />
         ))}
       </List>

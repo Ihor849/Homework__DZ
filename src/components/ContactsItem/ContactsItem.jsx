@@ -1,12 +1,29 @@
 import propTypes from 'prop-types';
+import {useState} from 'react'
 import { Item, Button } from './ContactsItem.styled';
 
 export const ContactItem = ({ id, name, number, onDelete }) => {
+  const [isEdit, setIsEdit] = useState(false);
+  const onEditContact=()=>{
+    setIsEdit(prevState=>!prevState);
+  };
   return (
     <Item key={id}>
+      {isEdit
+       ?
+      <>
+      <input type='text'/>
+      <input type='text'/>
+      </>
+      : 
+      <>
       <span>{name}</span>
       <span>{number}</span>
-      <Button type="button" onClick={() => onDelete(id, name)}>
+      </>
+      }
+     
+      
+      <Button type="button" onClick={() => onEditContact(id)}>
       Edit contact
       </Button>
       <Button type="button" onClick={() => onDelete(id, name)}>
