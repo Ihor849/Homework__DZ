@@ -12,8 +12,12 @@ export const ContactItem = ({ id, name, number, onDelete }) => {
       {isEdit
        ?
       <Wrapper>
-        <input type='text'/>
-        <input type='text'/>
+        <label htmlFor="name">Name
+          <input type='text'name="name"/>
+        </label>
+        <label htmlFor="number">Number
+          <input type='text' name="number"/>
+        </label>
       </Wrapper>
       : 
       <>
