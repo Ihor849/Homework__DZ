@@ -1,6 +1,6 @@
 import propTypes from 'prop-types';
 import {useState} from 'react'
-import { Item, Button, Wrapper,Wraname,Wranumber } from './ContactsItem.styled';
+import { Item, Button, Wrapper,Wranpame } from './ContactsItem.styled';
 
 export const ContactItem = ({ id, name, number, onDelete }) => {
   const [isEdit, setIsEdit] = useState(false);
@@ -12,16 +12,16 @@ export const ContactItem = ({ id, name, number, onDelete }) => {
       {isEdit
        ?
       <Wrapper>
-        <Wraname>
+        <Wranpame>
           <label htmlFor="name">Name
             <input type='text'name="name"/>
           </label>
-        </Wraname>
-        <Wraname>
+        </Wranpame>
+        <Wranpame>
           <label htmlFor="number">Number
             <input type='text' name="number"/>
           </label>
-        </Wraname>
+        </Wranpame>
       </Wrapper>
       : 
       <>

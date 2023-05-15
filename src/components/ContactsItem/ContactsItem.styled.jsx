@@ -15,9 +15,9 @@ display: flex;
 flex-direction: column;
 gap: 5px;
 `
-export const Wraname = styled.div`
+export const Wranpame = styled.div`
 display: flex;
-justify-content: space-between;
+
 
 `
 
