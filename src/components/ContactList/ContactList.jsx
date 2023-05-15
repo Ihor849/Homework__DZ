@@ -2,7 +2,7 @@ import propTypes from 'prop-types';
 import { ContactItem } from 'components/ContactsItem/ContactsItem';
 import { List } from './ContactList.styled';
 
-export const ContactsList = ({ contacts, onDelete }) => {
+export const ContactsList = ({ contacts, onDelete,updateContact  }) => {
   return (
     contacts.length !== 0 && (
       <List>
@@ -13,6 +13,7 @@ export const ContactsList = ({ contacts, onDelete }) => {
             number={number}
             id={id}
             onDelete={onDelete}
+            updateContact ={updateContact}
             
           />
         ))}

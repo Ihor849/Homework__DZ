@@ -18,7 +18,7 @@ gap: 5px;
 export const Wrapname = styled.div`
 display: flex;
 flex-direction: column;
-background-color: red;
+background-color: #c2b6b6;
 
 
 
