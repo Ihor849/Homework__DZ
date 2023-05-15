@@ -13,7 +13,12 @@ export const Item = styled.li`
 export const Wrapper =styled.div`
 display: flex;
 flex-direction: column;
-gap:10px;
+gap: 5px;
+`
+export const Wraname = styled.div`
+display: flex;
+justify-content: space-between;
+
 `
 
 export const Button = styled.button`
