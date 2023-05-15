@@ -70,6 +70,10 @@ export default function AppHook() {
     return contactsFilter;
   };
 
+  const onEditContact= ()=>{
+    
+  }
+
   const onDelete = (id, name) => {
     Notiflix.Confirm.show(
       'Confirm',

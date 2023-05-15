@@ -15,8 +15,11 @@ display: flex;
 flex-direction: column;
 gap: 5px;
 `
-export const Wranpame = styled.div`
+export const Wrapname = styled.div`
 display: flex;
+flex-direction: column;
+background-color: red;
+
 
 
 `
