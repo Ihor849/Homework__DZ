@@ -32,6 +32,10 @@ function reducer(state, action) {
         ...state, number: action.payload,
   
       };
+      
+    }
+    case "reset": {
+      return initialState
     }
       
     default: return state
@@ -60,7 +64,6 @@ export default function ContactForm({onSubmit}) {
     onSubmit(contact)
     dispatch({
     type: "reset"})
-    
     
   };
 
