@@ -39,9 +39,8 @@ function reducer(state, action) {
 };
 
 
-export default function ContactForm({contact}) {
-
-
+export default function ContactForm({onSubmit}) {
+ 
   const[state, dispatch] = useReducer(reducer, initialState)
    
   const hendleChange = e => {
@@ -55,10 +54,10 @@ export default function ContactForm({contact}) {
   const hendleSubmit = e => {
     console.log(state);
     e.preventDefault();
-    // data(state);
-    contact = {id:nanoid(),...state }
-    console.log(contact);
-
+  
+    const contact = {id:nanoid(),...state }
+   
+    onSubmit(contact)
     dispatch({
     type: "reset"})
     
