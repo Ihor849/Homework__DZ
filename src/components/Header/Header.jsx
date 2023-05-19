@@ -7,7 +7,7 @@ export  const Header = () => {
       
         <Wrapper>
           <li>
-            <Link to="/" end>
+            <Link to="/">
               Home
             </Link>
           </li>
