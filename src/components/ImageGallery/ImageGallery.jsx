@@ -4,7 +4,7 @@ import { Gallery } from './ImageGallery.styled';
 //
 
 export const ImageGallery = ({ images }) => {
-  const { id, webformatURL, largeImageURL, tags } = images;
+ 
   return (
     <Gallery>
       {images.map(item => (
@@ -19,15 +19,3 @@ export const ImageGallery = ({ images }) => {
 //   onDelete: propTypes.func.isRequired,
 // };
 
-{
-  /* <AppImg>
-  //{' '}
-  <Container>
-    // <Searchbar onSubmit={this.handleSubmit} />
-    // <ImageGallery images={this.state.items} />
-    // <Button btnLoadMore={this.onLoadMore} />
-    //{' '}
-  </Container>
-  //{' '}
-</AppImg>; */
-}
