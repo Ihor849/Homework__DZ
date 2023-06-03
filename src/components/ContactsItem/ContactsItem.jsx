@@ -1,13 +1,21 @@
-import propTypes from 'prop-types';
+// import propTypes from 'prop-types';
 import {useState} from 'react'
+import Notiflix from 'notiflix';
 import { Item, Button, Wrapper,Wrapname } from './ContactsItem.styled';
+import { useDispatch} from 'react-redux';
+import { deleteContact } from 'redux/contactsSlice';
 
-export const ContactItem = ({ id, name, number, onDelete, updateContact}) => {
+
+
+export const ContactItem = ({ id, name, number, updateContact}) => {
+  const dispatch = useDispatch();
   const [isEdit, setIsEdit] = useState(false);
   const [editName, setEditName] = useState(name);
   const [editNumber, setEditNumber] = useState(number)
 
   const onEditContact=()=>{
+   
+
     setIsEdit(prevState=>!prevState);
     if(isEdit){
       const contact = {
@@ -15,24 +23,49 @@ export const ContactItem = ({ id, name, number, onDelete, updateContact}) => {
         name: editName,
         number:editNumber,
       }
-      updateContact(contact);
+      
+      dispatch(updateContact(contact));
     }
-  };
-  const handleCange =(e)=>{
-    const {name,value}=e.currentTarget
-    switch(name){
-    case"editName":
-    setEditName(value);
-    break;
-    editName(value);
-    case "editNumber":
-      case"editNumber":
-      setEditNumber(value)
-
     
+  };
 
+  const handleChange =(e)=>{
+    const {value,name }=e.currentTarget
+
+    switch(name){
+    case "editName":
+      setEditName(value)
+      break;
+    case "editNumber": {
+      setEditNumber(value)
+      break;
+
+    }
+    default:  break;
   }
+   
   }
+
+  const onDelete = (id, name) => {
+      Notiflix.Confirm.show(
+        'Confirm',
+        ` Do You want to delete a ${name}?`,
+        'Yes',
+        'No',
+        () => {
+          
+          dispatch(deleteContact(id))
+          
+        },
+        () => {},
+        {
+          titleColor: '#ce6214',
+          titleFontSize: '20px',
+          messageColor: '#1e1e1e',
+          messageFontSize: '20px',
+        }
+      );
+    };
 
   return (
     <Item key={id}>
@@ -41,12 +74,12 @@ export const ContactItem = ({ id, name, number, onDelete, updateContact}) => {
       <Wrapper>
         <Wrapname>
           <label htmlFor="editName">Name
-            <input type='text'name="editName" onChange={handleCange} value={editName}/>
+            <input type='text'name="editName" onChange={handleChange} value={editName}/>
           </label>
         </Wrapname>
         <Wrapname>
           <label htmlFor="editNumber">Number
-            <input type='text' name="editNumber" onChange={handleCange} value={editNumber}/>
+            <input type='text' name="editNumber" onChange={handleChange} value={editNumber}/>
           </label>
         </Wrapname>
       </Wrapper>
@@ -68,9 +101,9 @@ export const ContactItem = ({ id, name, number, onDelete, updateContact}) => {
   );
 };
 
-ContactItem.propTypes = {
-  name: propTypes.string.isRequired,
-  id: propTypes.string.isRequired,
-  number: propTypes.string.isRequired,
-  onDelete: propTypes.func.isRequired,
-};
+// ContactItem.propTypes = {
+//   name: propTypes.string.isRequired,
+//   id: propTypes.string.isRequired,
+//   number: propTypes.string.isRequired,
+//   onDelete: propTypes.func.isRequired,
+// };
