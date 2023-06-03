@@ -1,5 +1,5 @@
 // import propTypes from 'prop-types';
-import { useSelector,useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { getContactsList } from 'redux/selectors';
 import { getContactsFilter } from 'redux/selectors';
 
@@ -19,7 +19,7 @@ export const ContactsList = () => {
   return (
     filterContacts.length !== 0 && (
       <List>
-        {contacts.map(({ id, name, number }) => (
+        {filterContacts.map(({ id, name, number }) => (
           <ContactItem
             key={id}
             name={name}
