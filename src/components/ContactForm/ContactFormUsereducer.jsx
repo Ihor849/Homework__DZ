@@ -1,7 +1,7 @@
 import { useDispatch,useSelector } from 'react-redux';
-import { addContact} from 'redux/contactsSlice';
+import { addContact } from 'redux/operations';
 import { getContactsList } from 'redux/selectors';
-import { nanoid } from 'nanoid';
+// import { nanoid } from 'nanoid';
 import Notiflix from 'notiflix';
 import {
   // FormBlock,
@@ -17,18 +17,12 @@ import {
 export default function ContactForm() {
   const contacts=useSelector(getContactsList)
  const dispatch=useDispatch()
-  // const hendleChange = e => {
-  //   const name = e.currentTarget.elements.value;
-  //   const number = e.currentTarget.elements.value;
-    
-  // };
   
-
   const hendleSubmit = e => {
     e.preventDefault();
-    const name = e.currentTarget.elements.name.value
-    const number = e.currentTarget.elements.number.value;
-    const newContact = {id:nanoid(),name,number };
+    let name = e.currentTarget.elements.name.value
+    let phone = e.currentTarget.elements.phone.value;
+    const newContact = {name,phone };
     if (
       contacts.find(
         contact => contact.name.toLowerCase() === newContact.name.toLowerCase()
@@ -40,11 +34,11 @@ export default function ContactForm() {
         `${newContact.name} already in the phonebook`
       );
       return;
-    } else if (contacts.find(contact => contact.number === newContact.number)) {
+    } else if (contacts.find(contact => contact.phone === newContact.phone)) {
       console.log('НОМЕР есть');
       Notiflix.Report.info(
         'INFO',
-        `${newContact.number} already in the phonebook`
+        `${newContact.phone} already in the phonebook`
       );
       return;
     }
@@ -53,7 +47,7 @@ export default function ContactForm() {
     );
    dispatch(addContact(newContact))
   };
-
+  
 
   return (
     <Form onSubmit={hendleSubmit}>
@@ -65,9 +59,9 @@ export default function ContactForm() {
             // onChange={hendleChange}
             // value={state.name}
             name="name"
-            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-            title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
-            required
+            // pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+            // title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
+            // required
           />
         </Label>
       </BoxName>
@@ -78,10 +72,10 @@ export default function ContactForm() {
             type="tel"
             // value={state.number}
             // onChange={hendleChange}
-            name="number"
-            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-            title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
-            required
+            name="phone"
+            // pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+            // title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
+            // required
           />
         </Label>
       </BoxNumber>
@@ -94,7 +88,4 @@ export default function ContactForm() {
 
 
 
-// ContactForm.protoTypes = {
-//   onSubmit: propTypes.func.isRequired,
-//   contacts: propTypes.arrayOf(propTypes.object).isRequired,
-// };
+

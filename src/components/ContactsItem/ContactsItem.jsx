@@ -3,7 +3,7 @@ import {useState} from 'react'
 import Notiflix from 'notiflix';
 import { Item, Button, Wrapper,Wrapname } from './ContactsItem.styled';
 import { useDispatch} from 'react-redux';
-import { deleteContact } from 'redux/contactsSlice';
+import { deleteContact } from 'redux/operations';
 
 
 
@@ -101,9 +101,3 @@ export const ContactItem = ({ id, name, number, updateContact}) => {
   );
 };
 
-// ContactItem.propTypes = {
-//   name: propTypes.string.isRequired,
-//   id: propTypes.string.isRequired,
-//   number: propTypes.string.isRequired,
-//   onDelete: propTypes.func.isRequired,
-// };

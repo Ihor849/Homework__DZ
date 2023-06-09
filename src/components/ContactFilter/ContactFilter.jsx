@@ -6,7 +6,6 @@ import { BoxFilter, Label, Input } from './ContactFilter.styled';
 
 export const ContactFilter = () => {
   const contacts = useSelector(getContactsList);
-  console.log(contacts);
   const filter = useSelector(getContactsFilter);
   console.log(filter);
   const dispatch=useDispatch();
@@ -25,7 +24,4 @@ export const ContactFilter = () => {
   );
 };
 
-// ContactFilter.propEypes = {
-//   filter: propTypes.string,
-//   onFilter: propTypes.func,
-// };
+
