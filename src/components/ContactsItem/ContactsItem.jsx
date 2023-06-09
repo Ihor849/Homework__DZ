@@ -3,11 +3,11 @@ import {useState} from 'react'
 import Notiflix from 'notiflix';
 import { Item, Button, Wrapper,Wrapname } from './ContactsItem.styled';
 import { useDispatch} from 'react-redux';
-import { deleteContact } from 'redux/operations';
+import { deleteContact,updateContact } from 'redux/operations';
 
 
 
-export const ContactItem = ({ id, name, number, updateContact}) => {
+export const ContactItem = ({ id, name, number}) => {
   const dispatch = useDispatch();
   const [isEdit, setIsEdit] = useState(false);
   const [editName, setEditName] = useState(name);
@@ -21,7 +21,7 @@ export const ContactItem = ({ id, name, number, updateContact}) => {
       const contact = {
         id: id,
         name: editName,
-        number:editNumber,
+        phone:editNumber,
       }
       
       dispatch(updateContact(contact));
@@ -74,12 +74,20 @@ export const ContactItem = ({ id, name, number, updateContact}) => {
       <Wrapper>
         <Wrapname>
           <label htmlFor="editName">Name
-            <input type='text'name="editName" onChange={handleChange} value={editName}/>
+            <input 
+            type='text'
+            name="editName" 
+            onChange={handleChange}
+             value={editName}/>
           </label>
         </Wrapname>
         <Wrapname>
           <label htmlFor="editNumber">Number
-            <input type='text' name="editNumber" onChange={handleChange} value={editNumber}/>
+            <input 
+            type='text'
+             name="editNumber"
+            onChange={handleChange}
+             value={editNumber}/>
           </label>
         </Wrapname>
       </Wrapper>

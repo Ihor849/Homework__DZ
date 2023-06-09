@@ -32,8 +32,6 @@ export default function AppHook() {
           <>
             {contacts.length > 4 && <ContactFilter />}
             {contacts.length !== 0 && <ContactsList />} 
-            {/* <ContactFilter />
-            <ContactsList /> */}
           </>
         </Section>
       </Container>

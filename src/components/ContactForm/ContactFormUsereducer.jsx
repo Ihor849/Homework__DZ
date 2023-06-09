@@ -20,6 +20,7 @@ export default function ContactForm() {
   
   const hendleSubmit = e => {
     e.preventDefault();
+    const form =e.currentTarget;
     let name = e.currentTarget.elements.name.value
     let phone = e.currentTarget.elements.phone.value;
     const newContact = {name,phone };
@@ -45,7 +46,8 @@ export default function ContactForm() {
     Notiflix.Notify.success(
       `${newContact.name} This subscriber is added to the phone book`
     );
-   dispatch(addContact(newContact))
+   dispatch(addContact(newContact));
+   form.reset()
   };
   
 
